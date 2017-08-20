@@ -43,7 +43,7 @@ function getEmpresa(codigo){
 	$.get(url, function(dados){
 		var dto=JSON.stringify(data);
 		dto=dto.replaceAll('\\n','<br>');
-		mostraEmpresa(dados);
+		mostraEmpresa(dto);
 	});
 }
 
