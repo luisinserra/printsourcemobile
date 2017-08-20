@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/geral.css">
+    <script type="text/javascript" src="js/urlen.js"></script>
     <script type="text/javascript" src="js/jsPesqEmpresas.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>PrintSource</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="http://printsource.jelasticlw.com.br">
 </head>
 <body>
 <div class="menu1" id='m1'>
@@ -22,7 +24,7 @@
 
     <ul>
         <li style="z-index: 7070;"><a class="menu1two"
-            href="javascript:k=1;">Pesquisas <!--[if gte IE 7]><!--></a>
+            href="javascript:k=1;">Empresas <!--[if gte IE 7]><!--></a>
             <!--<![endif]-->
             <table>
                 <tbody>
@@ -62,3 +64,97 @@
 
 <span id="spanSaida"></span>
 
+    <div id="divResultado" style="display: none;">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Razão social</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tRS"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Nome Fantasia</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tFanta"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>E-mail</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tEmail"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Site</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tSite"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Contato</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tContato"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Cargo</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tCargo"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Departamento</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tDepto"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Mail Contato</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tMC"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>PABX</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tPabx"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                <span style="float: right;"><b>Obs</b></span>
+            </div>
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                <span id="tObs"></span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
