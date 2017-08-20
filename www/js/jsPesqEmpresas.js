@@ -43,7 +43,7 @@ function getEmpresa(codigo){
 	var url="http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor="+codigo+"&campo=id&tipoCampo=String";
 	$.get(url, function(dados){
 		alert("Chegou!");
-		var dto=JSON.stringify(data);
+		var dto=JSON.stringify(dados);
 		alert("strignificado, fazer replace...");
 		dto=dto.replaceAll('\\n','<br>');
 		alert("replaçado. Mostrando...");
