@@ -39,17 +39,24 @@ function exibeResultadps(){
 }
 
 function getEmpresa(codigo){
+	alert("Buscando empresa "+codigo+"...");
 	var url="http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor="+codigo+"&campo=id&tipoCampo=String";
 	$.get(url, function(dados){
+		alert("Chegou!");
 		var dto=JSON.stringify(data);
+		alert("strignificado, fazer replace...");
 		dto=dto.replaceAll('\\n','<br>');
+		alert("replaçado. Mostrando...");
 		mostraEmpresa(dto);
 	});
 }
 
 function mostraEmpresa(dto){
+	alert("Entrou");
 	var dados=JSON.parse(dto);
+	alert("Parssados");
 	var empresa=getJson(dados);
+	alert("Virou empresa");
 	$("#spanSaida").empty();
 	if (empresa.email == 'null'){empresa.email='';}
 	if (empresa.website == 'null'){empresa.website='';}
@@ -59,11 +66,14 @@ function mostraEmpresa(dto){
 	if (empresa.emailContato == 'null'){empresa.emailContato='';}
 	if (empresa.pabx == 'null'){empresa.pabx='';}
 	if (empresa.obs == 'null'){empresa.obs='';}
+	alert("Dados formatados, abrir janela...");
 	formataDadosEmpresa(empresa);
 }
 
 function formataDadosEmpresa(empresa){
+	alert("Abrindo...");
     document.getElementById('divResultado').style.display='block';
+    alert("Aberto");
     document.getElementById('tRS').innerHTML=empresa.razaoSocial;
     document.getElementById('tFanta').innerHTML=empresa.fantasia;
     document.getElementById('tEmail').innerHTML=empresa.email;
