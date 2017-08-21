@@ -87,16 +87,16 @@ function carregouContatos(){
 	var razao=empresa.razaoSocial;
 	document.getElementById('tRazao').innerHTML=razao;
 
-	var url="http://node28.codenvy.io:38805/getContatosEmpresa.jsonx?codigo="+empresa.id;
+	var url="http://clever-jetserver.rhcloud.com/crmws/getContatosEmpresa.jsonx?codigo="+empresa.id;
 	$.get(url, function(dados) {
 		var contatos=dados.registros;
 		exibeContatos(contatos);
-	}
+	});
 }
 function exibeContatos(contatos){
 	var parte='';
 	var n=contatos.length;
-	for (var i = 0; i < n; i--) {
+	for (var i = 0; i < n; i++) {
 		var contato=contatos[i];
 		parte+='<div class="container cantonado">';
 		parte+='	<div class="row">';
