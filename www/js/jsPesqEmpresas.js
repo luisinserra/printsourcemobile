@@ -150,9 +150,11 @@ function exibeContatos(contatos){
 
 	document.getElementById('spanContatos').innerHTML=parte;
 	putMemo('curId',0);
-	complementaTelefones(idsContatos);
+	putMemo('idsContatos',idsContatos);
+	complementaTelefones();
 }
-function complementaTelefones(idsContatos){
+function complementaTelefones(){
+	var idsContatos=getMemo('idsContatos');
 	if (idsContatos != ''){
 		var termos=idsContatos.split(',');
 		var idx=getMemo('curId');
@@ -202,7 +204,14 @@ function exibeFones(fones){
 		parte+='	</div>';
 		parte+='<br>';
 	}
+	var idx=getMemo("curId");
+	idx=parseInt(idx,10);
+	idx--;
+	var elemento=document.getElementById('spanFone'+idx);
+	elemento.innerHTML=parte;
+	complementaTelefones();
 
+    /*
     var tit='<span id="spanTit">';
     tit+='<a href="javascript:fechaFloat(\'spanHid\');" style="background: #DC7003;border: 1px solid black; float: right;"><font color=White face="Arial">x</font></a><br>';
     tit+='</span>';
@@ -211,6 +220,7 @@ function exibeFones(fones){
 	formataSpan('spanHid', 130,320);
 	document.getElementById('spanHid').style.backgroundColor='#FFFFFF';
 	document.getElementById("spanHid").style.zIndex=1010;
+	*/
 }
 // http://node27.codenvy.io:38899/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
 // http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
