@@ -187,7 +187,7 @@ function exibeFones(fones){
     tit+='</span>';
 	document.getElementById('spanHid').innerHTML=tit+parte;
 	document.getElementById('spanHid').classList.add('cantinhos');
-	formataSpan('spanHid', 130,400);
+	formataSpan('spanHid', 130,320);
 	document.getElementById('spanHid').style.backgroundColor='#FFFFFF';
 	document.getElementById("spanHid").style.zIndex=1010;
 }
