@@ -96,11 +96,16 @@ function carregouContatos(){
 function exibeContatos(contatos){
 	var parte='';
 	var n=contatos.length;
+	var idsContatos='';
 	for (var i = 0; i < n; i++) {
 		var contato=contatos[i];
+		if (idsContatos != ''){
+			idsContatos+=',';
+		}
+		idsContatos+=contato.id;
 		if (contato.email == 'null'){ contato.email='';}
 		if (contato.depto == 'null'){contato.depto='';}
-		if (contato.depto == 'null'){contato.depto='';}
+		if (contato.cargo == 'null'){contato.cargo='';}
 		parte+='<div class="container cantonado">';
 		parte+='	<div class="row">';
 		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
@@ -137,11 +142,28 @@ function exibeContatos(contatos){
 		parte+='			'+contato.cargo;
 		parte+='		</div>';
 		parte+='	</div>';
+		parte+='<center><B>Fones</B></center>';
+		parte+='<span id="spanFone'+i+'"></span>';
 		parte+='</div>';
 		parte+='<br>';
 	}
 
 	document.getElementById('spanContatos').innerHTML=parte;
+	putMemo('curId',0);
+	complementaTelefones(idsContatos);
+}
+function complementaTelefones(idsContatos){
+	if (idsContatos != ''){
+		var termos=idsContatos.split(',');
+		var idx=getMemo('curId');
+		idx=parseInt(idx,10);
+		if (idx < termos.length){
+			var codigo=termos[idx];
+			idx++;
+			putMemo('curId',idx);
+			getFonesContato(codigo);
+		}
+	}
 }
 function getFonesContato(codigo){
 	var url="http://clever-jetserver.rhcloud.com/crmws/getFonesContato.jsonx?codigo="+codigo;
@@ -179,7 +201,6 @@ function exibeFones(fones){
 		parte+='		</div>';
 		parte+='	</div>';
 		parte+='<br>';
-
 	}
 
     var tit='<span id="spanTit">';
