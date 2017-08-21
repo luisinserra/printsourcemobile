@@ -39,24 +39,20 @@ function exibeResultadps(){
 }
 
 function getEmpresa(codigo){
-	alert("Buscando empresa "+codigo+"...");
+	window.localStorage.setItem("codEmpresa",codigo);
 	var url="http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor="+codigo+"&campo=id&tipoCampo=String";
 	$.get(url, function(dados){
-		alert("Chegou!");
 		var dto=JSON.stringify(dados);
-		alert("strignificado, fazer replace...");
 		dto=dto.replaceAll('\\n','<br>');
-		alert("replaçado. Mostrando...");
 		mostraEmpresa(dto);
 	});
 }
 
 function mostraEmpresa(dto){
-	alert("Entrou");
 	var dados=JSON.parse(dto);
-	alert("Parssados");
 	var empresa=getJson(dados);
-	alert("Virou empresa");
+	var ddEmpresa=JSON.stringify(empresa);
+	window.localStorage.setItem("ddEmpresa",ddEmpresa);
 	$("#spanSaida").empty();
 	if (empresa.email == 'null'){empresa.email='';}
 	if (empresa.website == 'null'){empresa.website='';}
@@ -66,14 +62,10 @@ function mostraEmpresa(dto){
 	if (empresa.emailContato == 'null'){empresa.emailContato='';}
 	if (empresa.pabx == 'null'){empresa.pabx='';}
 	if (empresa.obs == 'null'){empresa.obs='';}
-	alert("Dados formatados, abrir janela...");
 	formataDadosEmpresa(empresa);
 }
-
 function formataDadosEmpresa(empresa){
-	alert("Abrindo...");
     document.getElementById('divResultado').style.display='block';
-    alert("Aberto");
     document.getElementById('tRS').innerHTML=empresa.razaoSocial;
     document.getElementById('tFanta').innerHTML=empresa.fantasia;
     document.getElementById('tEmail').innerHTML=empresa.email;
@@ -86,6 +78,68 @@ function formataDadosEmpresa(empresa){
     document.getElementById('tObs').innerHTML=empresa.obs;
 }
 
+function pegaContatos(){
+	window.open('contatos.html','_top');
+}
+function carregouContatos(){
+	var ddEmpresa=window.localStorage.getItem("ddEmpresa");
+	var empresa=JSON.parse(ddEmpresa);
+	var razao=empresa.razaoSocial;
+	document.getElementById('tRazao').innerHTML=razao;
+
+	var url="http://node28.codenvy.io:38805/getContatosEmpresa.jsonx?codigo="+empresa.id;
+	$.get(url, function(dados) {
+		var contatos=dados.registros;
+		exibeContatos(contatos);
+	}
+}
+function exibeContatos(contatos){
+	var parte='';
+	var n=contatos.length;
+	for (var i = 0; i < n; i--) {
+		var contato=contatos[i];
+		parte+='<div class="container cantonado">';
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
+		parte+='			<span style="float: right;"><b>Nome</b></span>';
+		parte+='		</div>';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='			'+contato.nome;
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='';
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
+		parte+='			<span style="float: right;"><b>E-mail</b></span>';
+		parte+='		</div>';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='			'+contato.email;
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='';
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
+		parte+='			<span style="float: right;"><b>Depto</b></span>';
+		parte+='		</div>';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='			'+contato.depto;
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='';
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
+		parte+='			<span style="float: right;"><b>Cargo</b></span>';
+		parte+='		</div>';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='			'+contato.cargo;
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='</div>';
+		parte+='<br>';
+	}
+
+	document.getElementById('spanContatos').innerHTML=parte;
+}
 // http://node27.codenvy.io:38899/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
 // http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
 // [{"codigo":"cnpj","nome":"64674393200012","marcado":false},{"codigo":"email","nome":null,"marcado":false},{"codigo":"razaoSocial","nome":"clevermidia","marcado":false},{"codigo":"obs","nome":"PIS: 108.98695.59.4\n\nAT&T network:\nftp://ftp.attglobal.net/pub/custom/ibm_linux/agnclient-1.0-2.0.1.3003.i386.rpm\n\nftp://ftp.attglobal.net/pub/custom/ibm_linux/","marcado":false},{"codigo":"fantasia","nome":"clevermidia","marcado":false},{"codigo":"ie","nome":null,"marcado":false},{"codigo":"cargoContato","nome":null,"marcado":false},{"codigo":"codTipoendereco","nome":"0","marcado":false},{"codigo":"contatoEmpresa","nome":"Luis","marcado":false},{"codigo":"dddfax","nome":null,"marcado":false},{"codigo":"dddPABX","nome":"11","marcado":false},{"codigo":"deptoContato","nome":"Diretoria","marcado":false},{"codigo":"dtAtualizacao","nome":"","marcado":false},{"codigo":"dtUltContato","nome":"","marcado":false},{"codigo":"emailContato","nome":"luis@clevermidia.com.br","marcado":false},{"codigo":"faturamento","nome":null,"marcado":false},{"codigo":"fax","nome":null,"marcado":false},{"codigo":"mailing","nome":"0","marcado":false},{"codigo":"numeroFuncionarios","nome":"0","marcado":false},{"codigo":"pabx","nome":"3010-0440","marcado":false},{"codigo":"produtosServicos","nome":"CRM Clevermidia, Chever House Imóveis","marcado":false},{"codigo":"ramoAtividade","nome":"0","marcado":false},{"codigo":"website","nome":"clevermidia.com.br","marcado":false},{"codigo":"status","nome":null,"marcado":false},{"codigo":"id","nome":"985","marcado":false}]
