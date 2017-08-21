@@ -98,13 +98,16 @@ function exibeContatos(contatos){
 	var n=contatos.length;
 	for (var i = 0; i < n; i++) {
 		var contato=contatos[i];
+		if (contato.email == 'null'){ contato.email='';}
+		if (contato.depto == 'null'){contato.depto='';}
+		if (contato.depto == 'null'){contato.depto='';}
 		parte+='<div class="container cantonado">';
 		parte+='	<div class="row">';
 		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
 		parte+='			<span style="float: right;"><b>Nome</b></span>';
 		parte+='		</div>';
 		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
-		parte+='			'+contato.nome;
+		parte+='			<a href="javascript:getFonesContato('+contato.id+');" class="z">'+contato.nome;
 		parte+='		</div>';
 		parte+='	</div>';
 		parte+='';
@@ -140,13 +143,61 @@ function exibeContatos(contatos){
 
 	document.getElementById('spanContatos').innerHTML=parte;
 }
+function getFonesContato(codigo){
+	var url="http://clever-jetserver.rhcloud.com/crmws/getFonesContato.jsonx?codigo="+codigo;
+	$.get(url, function(dados) {
+		var fones=dados.registros;
+		exibeFones(fones);
+	});
+}
+function exibeFones(fones){
+	var parte='';
+	var n=fones.length;
+	for (var i = 0; i < n; i++){
+		var fone=fones[i];
+		var tipo=fone.tipoFone;
+		var nometipo="";
+		if (tipo == 1){nometipo='Celular';}
+		if (tipo == 2){nometipo='Comercial';}
+		if (tipo == 3){nometipo='Fax';}
+		if (tipo == 4){nometipo='Residencial';}
+		if (tipo == 5){nometipo='MÃ³dulo';}
+		if (tipo == 9){nometipo='Nextel';}
+		if (tipo == 11){nometipo='Oi';}
+		if (tipo == 12){nometipo='Claro';}
+		if (tipo == 14){nometipo='Vivo';}
+		var ddd=fone.ddd;
+		if (ddd == 'null'){ddd='';}
+		var fone=fone.fone;
+		if (fone == 'null'){fone='';}
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">';
+		parte+='			'+nometipo;
+		parte+='		</div>';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='			('+ddd+') '+fone;
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='<br>';
+
+	}
+
+    var tit='<span id="spanTit">';
+    tit+='<a href="javascript:fechaFloat(\'spanHid\');" style="background: #DC7003;border: 1px solid black; float: right;"><font color=White face="Arial">x</font></a><br>';
+    tit+='</span>';
+	document.getElementById('spanHid').innerHTML=tit+parte;
+	document.getElementById('spanHid').classList.add('cantinhos');
+	formataSpan('spanHid', 130,400);
+	document.getElementById('spanHid').style.backgroundColor='#FFFFFF';
+	document.getElementById("spanHid").style.zIndex=1010;
+}
 // http://node27.codenvy.io:38899/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
 // http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
-// [{"codigo":"cnpj","nome":"64674393200012","marcado":false},{"codigo":"email","nome":null,"marcado":false},{"codigo":"razaoSocial","nome":"clevermidia","marcado":false},{"codigo":"obs","nome":"PIS: 108.98695.59.4\n\nAT&T network:\nftp://ftp.attglobal.net/pub/custom/ibm_linux/agnclient-1.0-2.0.1.3003.i386.rpm\n\nftp://ftp.attglobal.net/pub/custom/ibm_linux/","marcado":false},{"codigo":"fantasia","nome":"clevermidia","marcado":false},{"codigo":"ie","nome":null,"marcado":false},{"codigo":"cargoContato","nome":null,"marcado":false},{"codigo":"codTipoendereco","nome":"0","marcado":false},{"codigo":"contatoEmpresa","nome":"Luis","marcado":false},{"codigo":"dddfax","nome":null,"marcado":false},{"codigo":"dddPABX","nome":"11","marcado":false},{"codigo":"deptoContato","nome":"Diretoria","marcado":false},{"codigo":"dtAtualizacao","nome":"","marcado":false},{"codigo":"dtUltContato","nome":"","marcado":false},{"codigo":"emailContato","nome":"luis@clevermidia.com.br","marcado":false},{"codigo":"faturamento","nome":null,"marcado":false},{"codigo":"fax","nome":null,"marcado":false},{"codigo":"mailing","nome":"0","marcado":false},{"codigo":"numeroFuncionarios","nome":"0","marcado":false},{"codigo":"pabx","nome":"3010-0440","marcado":false},{"codigo":"produtosServicos","nome":"CRM Clevermidia, Chever House Imóveis","marcado":false},{"codigo":"ramoAtividade","nome":"0","marcado":false},{"codigo":"website","nome":"clevermidia.com.br","marcado":false},{"codigo":"status","nome":null,"marcado":false},{"codigo":"id","nome":"985","marcado":false}]
+// [{"codigo":"cnpj","nome":"64674393200012","marcado":false},{"codigo":"email","nome":null,"marcado":false},{"codigo":"razaoSocial","nome":"clevermidia","marcado":false},{"codigo":"obs","nome":"PIS: 108.98695.59.4\n\nAT&T network:\nftp://ftp.attglobal.net/pub/custom/ibm_linux/agnclient-1.0-2.0.1.3003.i386.rpm\n\nftp://ftp.attglobal.net/pub/custom/ibm_linux/","marcado":false},{"codigo":"fantasia","nome":"clevermidia","marcado":false},{"codigo":"ie","nome":null,"marcado":false},{"codigo":"cargoContato","nome":null,"marcado":false},{"codigo":"codTipoendereco","nome":"0","marcado":false},{"codigo":"contatoEmpresa","nome":"Luis","marcado":false},{"codigo":"dddfax","nome":null,"marcado":false},{"codigo":"dddPABX","nome":"11","marcado":false},{"codigo":"deptoContato","nome":"Diretoria","marcado":false},{"codigo":"dtAtualizacao","nome":"","marcado":false},{"codigo":"dtUltContato","nome":"","marcado":false},{"codigo":"emailContato","nome":"luis@clevermidia.com.br","marcado":false},{"codigo":"faturamento","nome":null,"marcado":false},{"codigo":"fax","nome":null,"marcado":false},{"codigo":"mailing","nome":"0","marcado":false},{"codigo":"numeroFuncionarios","nome":"0","marcado":false},{"codigo":"pabx","nome":"3010-0440","marcado":false},{"codigo":"produtosServicos","nome":"CRM Clevermidia, Chever House ImÃ³veis","marcado":false},{"codigo":"ramoAtividade","nome":"0","marcado":false},{"codigo":"website","nome":"clevermidia.com.br","marcado":false},{"codigo":"status","nome":null,"marcado":false},{"codigo":"id","nome":"985","marcado":false}]
 
 // http://node28.codenvy.io:38805/getContatosEmpresa.jsonx?codigo=985
 // http://clever-jetserver.rhcloud.com/crmws/getContatosEmpresa.jsonx?codigo=985
-// {"registros":[{"nome":"Luis","tipoFone":"1","email":"luis@clevermidia.com.br","ddd":"11","fone":"8268-8888","depto":"Diretoria","anoNasc":"null","apelido":"Luis","campo1":"null","campo2":"null","campo3":"null","campo4":"null","campo5":"null","cargo":"mkt","celMsg":"null","conjuge":"Sônia","cpf":"04377945820","dddMsg":"null","diaNasc":"11","dtNasc":"","mesNasc":"09","referencia":"20017535122","sexo":"M","valor1":"null","valor2":"null","valor3":"null","valor4":"null","valor5":"null","status":"0","id":"1049"}]}
+// {"registros":[{"nome":"Luis","tipoFone":"1","email":"luis@clevermidia.com.br","ddd":"11","fone":"8268-8888","depto":"Diretoria","anoNasc":"null","apelido":"Luis","campo1":"null","campo2":"null","campo3":"null","campo4":"null","campo5":"null","cargo":"mkt","celMsg":"null","conjuge":"SÃ´nia","cpf":"04377945820","dddMsg":"null","diaNasc":"11","dtNasc":"","mesNasc":"09","referencia":"20017535122","sexo":"M","valor1":"null","valor2":"null","valor3":"null","valor4":"null","valor5":"null","status":"0","id":"1049"}]}
 
 // http://node28.codenvy.io:39691/getFonesContato.jsonx?codigo=1049
 // http://clever-jetserver.rhcloud.com/crmws/getFonesContato.jsonx?codigo=1049
