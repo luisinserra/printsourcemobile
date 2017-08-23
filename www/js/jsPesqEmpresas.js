@@ -225,12 +225,13 @@ function carregaEnderecos(){
 	alert(url);
 	$.get(url, function(dados) {
 		var enderecos=dados.registros;
-		alert("Chamando exibição...");
+		alert("Chamando exibição para "+dados.registros.length+"...");
 		exibeEnderecos(enderecos);
 	});
 }
 function exibeEnderecos(enderecos){
 	var parte='';
+	alert("setando n...");
 	var n=enderecos.length;
 	alert("n: "+n);
 	for (var i = 0; i < n; i++){
