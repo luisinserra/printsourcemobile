@@ -222,14 +222,17 @@ function carregaEnderecos(){
 	document.getElementById('tRazao').innerHTML=razao;
 
 	var url="http://clever-jetserver.rhcloud.com/crmws/getEnderecosEmpresa.html?codigo="+empresa.id;
+	alert(url);
 	$.get(url, function(dados) {
 		var enderecos=dados.registros;
+		alert("Chamando exibição...");
 		exibeEnderecos(enderecos);
 	});
 }
 function exibeEnderecos(enderecos){
 	var parte='';
 	var n=enderecos.length;
+	alert("n: "+n);
 	for (var i = 0; i < n; i++){
 		var endereco=enderecos[i];
 		var referencia=endereco.referencia;
@@ -250,6 +253,7 @@ function exibeEnderecos(enderecos){
 		if (numero == 'null'){numero='';}
 		var tipoLogradouro=endereco.tipoLogradouro;
 		if (tipoLogradouro == 'null'){tipoLogradouro='';}
+		alert("Formatou "+i+"...");
 		parte+='<div class="container cantonado">';
 		parte+='	<div class="row">';
 		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
