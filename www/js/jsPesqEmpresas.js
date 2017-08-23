@@ -112,7 +112,7 @@ function exibeContatos(contatos){
 		parte+='			<span style="float: right;"><b>Nome</b></span>';
 		parte+='		</div>';
 		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
-		parte+='			<a href="javascript:getFonesContato('+contato.id+');" class="z">'+contato.nome;
+		parte+='			'+contato.nome;
 		parte+='		</div>';
 		parte+='	</div>';
 		parte+='';
@@ -210,17 +210,74 @@ function exibeFones(fones){
 	var elemento=document.getElementById('spanFone'+idx);
 	elemento.innerHTML=parte;
 	complementaTelefones();
+}
 
-    /*
-    var tit='<span id="spanTit">';
-    tit+='<a href="javascript:fechaFloat(\'spanHid\');" style="background: #DC7003;border: 1px solid black; float: right;"><font color=White face="Arial">x</font></a><br>';
-    tit+='</span>';
-	document.getElementById('spanHid').innerHTML=tit+parte;
-	document.getElementById('spanHid').classList.add('cantinhos');
-	formataSpan('spanHid', 130,320);
-	document.getElementById('spanHid').style.backgroundColor='#FFFFFF';
-	document.getElementById("spanHid").style.zIndex=1010;
-	*/
+function pegaEnderecos(){
+	window.open('enderecos.html','_top');
+}
+function carregaEnderecos(){
+	var ddEmpresa=window.localStorage.getItem("ddEmpresa");
+	var empresa=JSON.parse(ddEmpresa);
+	var razao=empresa.razaoSocial;
+	document.getElementById('tRazao').innerHTML=razao;
+
+	var url="http://clever-jetserver.rhcloud.com/crmws/getEnderecosEmpresa.html?codigo="+empresa.id;
+	$.get(url, function(dados) {
+		var enderecos=dados.registros;
+		exibeEnderecos(enderecos);
+	});
+}
+function exibeEnderecos(enderecos){
+	var parte='';
+	var n=enderecos.length;
+	for (var i = 0; i < n; i++){
+		var endereco=enderecos[i];
+		var referencia=endereco.referencia;
+		if (referencia == 'null'){referencia='';}
+		var bairro=endereco.bairro;
+		if (bairro == 'null'){bairro='';}
+		var cep=endereco.cep;
+		if (cep == 'null'){cep='';}
+		var cidade=endereco.cidade;
+		if (cidade == 'null'){cidade='';}
+		var complemento=endereco.complemento;
+		if (complemento == 'null'){complemento='';}
+		var estado=endereco.estado;
+		if (estado == 'null'){estado='';}
+		var logradouro=endereco.logradouro;
+		if (logradouro == 'null'){logradouro='';}
+		var numero=endereco.numero;
+		if (numero == 'null'){numero='';}
+		var tipoLogradouro=endereco.tipoLogradouro;
+		if (tipoLogradouro == 'null'){tipoLogradouro='';}
+		parte+='<div class="container cantonado">';
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='			'+tipoLogradouro+' '+logradouro;
+		parte+=', '+numero;
+		if (complemento != ''){
+			parte+=' - '+complemento;
+		}
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='	<div class="row">';
+		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+		parte+='        	<B>Cidade:</B> '+cidade+'-'+estado;
+		parte+='		</div>';
+		parte+='	</div>';
+		parte+='';
+		if (referencia != ''){
+			parte+='	</div>';
+			parte+='	<div class="row">';
+			parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
+			parte+='        	<B>Referência:</B> '+referencia;
+			parte+='		</div>';
+			parte+='	</div>';
+		}
+		parte+='<br>';
+		parte+='</div>';
+	}
+	document.getElementById('spanEnderecos').innerHTML=parte;
 }
 // http://node27.codenvy.io:38899/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
 // http://clever-jetserver.rhcloud.com/crmws/ajax/getRegistro.jsonx?nomeClasse=Empresas&valor=985&campo=id&tipoCampo=String
@@ -233,4 +290,7 @@ function exibeFones(fones){
 // http://node28.codenvy.io:39691/getFonesContato.jsonx?codigo=1049
 // http://clever-jetserver.rhcloud.com/crmws/getFonesContato.jsonx?codigo=1049
 // {"registros":[{"tipoFone":"5","ddd":"11","fone":"2683-8281","codContato":"1049","id":"183"}]}
+
+// http://node29.codenvy.io:41186/getEnderecosEmpresa.html?codigo=985
+// {"registros":[{"referencia":"null","empresa":"985","bairro":"null","cep":"null","cidade":"São Paulo","cnpjLocal":"null","codTpEndMais":"0","complemento":"null","estado":"SP","logradouro":"Particular A","numero":"53","tipoLogradouro":"TV","id":"3882"}]}
 
