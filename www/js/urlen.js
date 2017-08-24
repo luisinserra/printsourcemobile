@@ -4,7 +4,7 @@ var X1=0;
 function URLEncode (clearString) {
   var output = "";
   var x = 0;
-  clearString = clearString.toString();
+  clearString = clearString.toString(); 
   var regex = /(^[a-zA-Z0-9_.]*)/;
   while (x < clearString.length) {
     var match = regex.exec(clearString.substr(x));

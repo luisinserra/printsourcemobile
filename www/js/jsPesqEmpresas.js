@@ -246,9 +246,7 @@ function retornoKK(dados){
 }
 function exibeEnderecos(enderecos){
 	var parte='';
-	alert("setando n...");
 	var n=enderecos.length;
-	alert("n: "+n);
 	for (var i = 0; i < n; i++){
 		var endereco=enderecos[i];
 		var referencia=endereco.referencia;
@@ -269,7 +267,6 @@ function exibeEnderecos(enderecos){
 		if (numero == 'null'){numero='';}
 		var tipoLogradouro=endereco.tipoLogradouro;
 		if (tipoLogradouro == 'null'){tipoLogradouro='';}
-		alert("Formatou "+i+"...");
 		parte+='<div class="container cantonado">';
 		parte+='	<div class="row">';
 		parte+='		<div class="col-xs-9 col-sm-9 col-md=9 col-lg-9">';
