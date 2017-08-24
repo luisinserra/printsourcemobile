@@ -226,6 +226,7 @@ function carregaEnderecos(){
 	var negocio='http://clever-jetserver.rhcloud.com/crmws/getEnderecosEmpresa';
     var funcao='';
     var parms="&codigo="+empresa.id;
+    putMemo('encoda','S');
     putMemo('retornoAx', 'retornoKK');
     chamaJSon(negocio,funcao,parms);
 
