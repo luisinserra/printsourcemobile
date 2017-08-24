@@ -227,6 +227,9 @@ function carregaEnderecos(){
 		var enderecos=dados.registros;
 		alert("Chamando exibição para "+enderecos+"...");
 		exibeEnderecos(enderecos);
+	}).fail(function (e){
+		alert("Falha");
+		alert(e.getMessage());
 	});
 }
 function exibeEnderecos(enderecos){
