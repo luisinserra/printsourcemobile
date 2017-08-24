@@ -222,7 +222,6 @@ function carregaEnderecos(){
 	document.getElementById('tRazao').innerHTML=razao;
 
 	var url="http://clever-jetserver.rhcloud.com/crmws/getEnderecosEmpresa.html?codigo="+empresa.id;
-	alert(url);
 	$.get(url, function(dados) {
 		var enderecos=dados.registros;
 		alert("Chamando exibição para "+enderecos+"...");
