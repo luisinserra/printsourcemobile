@@ -31,7 +31,7 @@
                     <tr>
                         <td>
                             <ul>
-                                <li><a href="listaContatos.html">Contatos</a></li>
+                                <li><a href="listaEmpresas.html">Raz Social</a></li>
                             </ul>
                         </td>
                     </tr>
@@ -50,12 +50,12 @@
     <div class="cantonado">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Razão Social</b></span>
+                <span style="float: right;"><b>Nome</b></span>
             </div>
             <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                 <input type="text" id="tParm" size="10" maxlength="40">
                 &nbsp;
-                <span class="box-cinza cantinhos" style="width: 800px;padding: 10px;background-color: #267cb5;color: white;cursor:pointer;" onclick="goBuscaRazao();">Pesquisar</span>
+                <span class="box-cinza cantinhos" style="width: 800px;padding: 10px;background-color: #267cb5;color: white;cursor:pointer;" onclick="goBuscaContatos();">Pesquisar</span>
             </div>
         </div>
     
@@ -67,19 +67,19 @@
     <div id="divResultado" style="display: none;">
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Razão social</b></span>
+                <span style="float: right;"><b>Nome</b></span>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tRS"></span>
+                <span id="tNome"></span>
             </div>
         </div>
 
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Nome Fantasia</b></span>
+                <span style="float: right;"><b>Apelido</b></span>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tFanta"></span>
+                <span id="tApelido"></span>
             </div>
         </div>
 
@@ -94,24 +94,6 @@
 
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Site</b></span>
-            </div>
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tSite"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Contato</b></span>
-            </div>
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tContato"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                 <span style="float: right;"><b>Cargo</b></span>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
@@ -121,7 +103,7 @@
 
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Departamento</b></span>
+                <span style="float: right;"><b>Depto</b></span>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                 <span id="tDepto"></span>
@@ -130,38 +112,23 @@
 
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Mail Contato</b></span>
+                <span style="float: right;"><b>Referência</b></span>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tMC"></span>
+                <span id="tRef"></span>
             </div>
         </div>
-
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>PABX</b></span>
+                <span style="float: right;"><b>Empresa</b></span>
             </div>
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tPabx"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                <span style="float: right;"><b>Obs</b></span>
-            </div>
-            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                <span id="tObs"></span>
+                <span id="tEmpresa"></span>
             </div>
         </div>
 
         <br>
         <br>
-        <center>
-            <span class="box-cinza cantinhos" style="width: 800px;padding: 10px;background-color: #267cb5;color: white;cursor:pointer;" onclick="pegaContatos();">contatos</span>
-            &nbsp;
-            <span class="box-cinza cantinhos" style="width: 800px;padding: 10px;background-color: #267cb5;color: white;cursor:pointer;" onclick="pegaEnderecos();">endereços</span>
-        </center>
     </div>
 
 </body>
