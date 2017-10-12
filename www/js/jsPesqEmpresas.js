@@ -3,7 +3,7 @@ function goBuscaRazao(){
 	var nome=document.getElementById('tParm').value;
 	window.localStorage.setItem("pgEmps",0);
     window.localStorage.setItem("passoEmps",50);
-	var url = "http://clever-jetserver.rhcloud.com/crmws/ajax/chooseRazao.jsonx?parm="+nome;
+	var url = "http://clevermidia.com.br/printsource/crmws/ajax/chooseRazao.jsonx?parm="+nome;
 	$.get(url, function(data) {
     	$("#spanSaida").empty();
     	var dto=JSON.stringify(data);
